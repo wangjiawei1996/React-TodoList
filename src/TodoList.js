@@ -1,6 +1,6 @@
 import React, { Component, Fragment} from 'react';
-import './style.css';
 import TodoItem from './TodoItem';
+import './style.css';
 
 class TodoList extends Component {
   constructor(props) {  //接受props数据
@@ -9,6 +9,9 @@ class TodoList extends Component {
 			inputValue: '',
 			list: []
 		}
+		this.handleInputChange = this.handleInputChange.bind(this)
+		this.handleBtnClick = this.handleBtnClick.bind(this)
+		this.handleItemDelete = this.handleItemDelete.bind(this)
 	}
 
     render() {
@@ -21,45 +24,46 @@ class TodoList extends Component {
 								  id="insertArea"
 								  className='input'
 									value={this.state.inputValue}
-									onChange={this.handleInputChange.bind(this)}
+									onChange={this.handleInputChange}
 							/>
-								<button onClick={this.handleBtnClick.bind(this)}>提交</button>
+								<button onClick={this.handleBtnClick}>提交</button>
 							</div>
 							<ul>
-								{
-									this.state.list.map((item,index) => {
-										return (
-											<div>
-												<TodoItem
-													content={item}
-													index={index}
-													DeleteItem = {this.handleItemDelete.bind(this)}
-											  />
-											</div>
-										)
-									})
-								}
+								{this.getTodoItem()}
 							</ul>
 						</Fragment>
         )
 		}
-		handleInputChange(e){
-			this.setState({
-				inputValue : e.target.value
+		getTodoItem() {
+			return this.state.list.map((item,index) => {
+				return (
+					<TodoItem
+						key = {index}
+						content={item}
+						index={index}
+						DeleteItem = {this.handleItemDelete}
+					/>
+				)
 			})
+		}
+		handleInputChange(e){
+			const value = e.target.value
+			this.setState(() => ({
+				inputValue : value
+			}));
 		}
 		handleBtnClick(){
-			this.setState({
-				list:[...this.state.list,this.state.inputValue],   //...是个展开运算符
-				inputValue:''
-			})
+			this.setState((prevState) => ({
+				list:[...prevState.list, prevState.inputValue],   //...是个展开运算符
+		   	inputValue:''
+			}));
 		}
 		handleItemDelete(index){
-			const list = [...this.state.list];     //state不允许我们做任何改变 非得改可以拷贝一个副本，进行传值
-			list.splice(index, 1) 
-			this.setState({
-				list:list
+			setState((prevState) => {
+				const list = [...prevState.list];     //state不允许我们做任何改变 非得改可以拷贝一个副本，进行传值
+				list.splice(index, 1);
+				return {list}
 			})
-		}
+	}
 }
 export default TodoList;
