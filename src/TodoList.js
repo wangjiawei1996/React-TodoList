@@ -59,7 +59,7 @@ class TodoList extends Component {
 			}));
 		}
 		handleItemDelete(index){
-			setState((prevState) => {
+			this.setState((prevState) => {
 				const list = [...prevState.list];     //state不允许我们做任何改变 非得改可以拷贝一个副本，进行传值
 				list.splice(index, 1);
 				return {list}
