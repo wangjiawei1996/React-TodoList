@@ -39,7 +39,7 @@ class TodoList extends Component {
 				return (
 					<TodoItem
 						key = {index}
-						content={item}
+						content={item}   //子组件怎么改变父组件的数据：父组件向子组件传递一个方法，子组件向父组件传值时，需要调用这个方法
 						index={index}
 						DeleteItem = {this.handleItemDelete}
 					/>
