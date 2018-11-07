@@ -70,3 +70,13 @@ class TodoList extends Component {
 	}
 }
 export default TodoList;
+
+//虚拟Dom
+//1.state数据
+//2.JSX模板
+//3.数据 + 模板 结合，生成真是的Dom，来显示
+//4.生成虚拟Dom(虚拟Dom就是一个Js对象，用它来描述真实的Dom) 比较Js对象不要怎么耗性能
+//5.state发生改变
+//6.数据+模板生成新的虚拟Dom       
+//7.比较原始和新的虚拟Dom,找到区别
+//8.直接操作Dom,改变内容
