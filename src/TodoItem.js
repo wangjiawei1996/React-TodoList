@@ -9,8 +9,8 @@ class TodoItem extends Component {
 	}
 
 	shouldComponentUpdate(nextProps,nextState){
-		if(nextProps.content != this.props.content){
-			return ture
+		if(nextProps.content !== this.props.content){
+			return true
 		}else{
 			return false
 		}
