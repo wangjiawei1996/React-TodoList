@@ -17,12 +17,13 @@ class TodoList extends Component {
     )
   }
 }
-
+//store里的数据和props里的数据相关联
 const mapStateToProps = (state) =>{
   return {
     inputValue:state.inputValue
   }
 }
+//props里的数据对store里的数据做修改和store里的dispatch方法做关联
 const mapDispatchToProps = (dispatch) =>{
   return {
     changeInputValue(e) {
