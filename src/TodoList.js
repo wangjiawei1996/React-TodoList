@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import store from './store';
-import connect from 'react-redux';
+import { connect } from 'react-redux';
 
 class TodoList extends Component {
   render() {

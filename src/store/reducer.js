@@ -1,5 +1,5 @@
 const defaultState = {
-  inputValue: '',
+  inputValue: 'hekko',
   list:[]
 }
 
