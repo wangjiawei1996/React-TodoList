@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
-import store from './store';
 import { connect } from 'react-redux';
 
-class TodoList extends Component {
-  render() {
+const TodoList = (props) => {
+  const { inputValue,list,changeInputValue,handleClick } = props;
     return (
       <div>
         <div>
-          <input value={this.props.inputValue} onChange={this.props.changeInputValue.bind(this)}/>
-          <button>提交</button>
+          <input value={ inputValue } onChange={changeInputValue} />
+          <button onClick={handleClick}>提交</button>
         </div>
         <ul>
-          <li>Dell</li>
+          {
+            list.map((item,index) => {
+              return <li key={index}>{item}</li>
+            })
+          }
         </ul>
       </div>
     )
-  }
 }
+
+
 //store里的数据和props里的数据相关联
 const mapStateToProps = (state) =>{
   return {
-    inputValue:state.inputValue
+    inputValue:state.inputValue,
+    list:state.list
   }
 }
 //props里的数据对store里的数据做修改和store里的dispatch方法做关联
@@ -32,6 +37,12 @@ const mapDispatchToProps = (dispatch) =>{
         value:e.target.value
       }
       dispatch(action)
+    },
+    handleClick(){
+      const action = {
+        type:'add_item'
+      }
+      dispatch(action);
     }
   }
 }
